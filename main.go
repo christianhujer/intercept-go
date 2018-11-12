@@ -79,14 +79,13 @@ func Strings(code func()) (*string, *string, error) {
 	wStdout.Close()
 	wStderr.Close()
 
-
 	resultStdout, err1 := bufToString(rStdout)
 	resultStderr, err2 := bufToString(rStderr)
 
 	return resultStdout, resultStderr, or(err1, err2)
 }
 
-func or(errors... error) error {
+func or(errors ...error) error {
 	for _, err := range errors {
 		if err != nil {
 			return err
