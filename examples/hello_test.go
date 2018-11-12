@@ -1,20 +1,3 @@
-# interceptor
-Go library to intercept stdout and stderr, useful in testing.
-
-## Example
-Given the following main program
-```
-package hello
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, world!")
-}
-```
-
-Here's how to test it:
-```
 package hello
 
 import (
@@ -29,4 +12,3 @@ func TestHello(t *testing.T) {
 	AssertEquals(t, "", *stderr)
 	AssertEquals(t, nil, err)
 }
-```

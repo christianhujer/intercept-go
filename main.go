@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+// InterceptBytes intercepts os.Stdout and os.Stderr for a function as byte arrays.
+// It returns the data intercepted on Stdout,
+// the data intercepted on Stderr,
+// and an error, if anything went wrong during interception.
 func InterceptBytes(code func()) ([]byte, []byte, error) {
 	originalStdout := os.Stdout
 	originalStderr := os.Stderr
@@ -41,6 +45,10 @@ func InterceptBytes(code func()) ([]byte, []byte, error) {
 	return resultStdout, resultStderr, or(err1, err2)
 }
 
+// InterceptStrings intercepts os.Stdout and os.Stderr for a function as strings.
+// It returns a pointer to the string intercepted on Stdout,
+// a pointer to the string intercepted on Stderr,
+// and an error, if anything went wrong during interception.
 func InterceptStrings(code func()) (*string, *string, error) {
 	originalStdout := os.Stdout
 	originalStderr := os.Stderr
