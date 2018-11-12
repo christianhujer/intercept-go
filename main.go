@@ -1,4 +1,6 @@
-package interceptor
+// interceptor allows intercepting os.Stdout and os.Stderr as arrays of bytes or strings.
+// That is useful for unit testing functions that produce output on os.Stdout or os.Stderr without any facility to redirect.
+package intercept
 
 import (
 	"bytes"
@@ -7,11 +9,11 @@ import (
 	"os"
 )
 
-// InterceptBytes intercepts os.Stdout and os.Stderr for a function as byte arrays.
+// Bytes intercepts os.Stdout and os.Stderr for a function as byte arrays.
 // It returns the data intercepted on Stdout,
 // the data intercepted on Stderr,
 // and an error, if anything went wrong during interception.
-func InterceptBytes(code func()) ([]byte, []byte, error) {
+func Bytes(code func()) ([]byte, []byte, error) {
 	originalStdout := os.Stdout
 	originalStderr := os.Stderr
 	defer func() {
@@ -45,11 +47,11 @@ func InterceptBytes(code func()) ([]byte, []byte, error) {
 	return resultStdout, resultStderr, or(err1, err2)
 }
 
-// InterceptStrings intercepts os.Stdout and os.Stderr for a function as strings.
+// Strings intercepts os.Stdout and os.Stderr for a function as strings.
 // It returns a pointer to the string intercepted on Stdout,
 // a pointer to the string intercepted on Stderr,
 // and an error, if anything went wrong during interception.
-func InterceptStrings(code func()) (*string, *string, error) {
+func Strings(code func()) (*string, *string, error) {
 	originalStdout := os.Stdout
 	originalStderr := os.Stderr
 	defer func() {
